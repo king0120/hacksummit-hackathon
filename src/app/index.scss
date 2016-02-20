@@ -33,19 +33,36 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   padding: 0 15px;
   margin: 0 5%;
 }
-.land{
+// .land{
+//   fill: #222;
+// }
+
+// // .county-boundary{
+// //   fill: none;
+// //   stroke: #fff;
+// //   stroke-width: .5px;
+// // }
+
+// // .state-boundry{
+// //   fill: none;
+// //   stroke: #fff;
+// //   stroke-width: 1px;
+// // }
+
+// // .district{
+// //   fill: #222;
+// // }
+// // .district:hover{
+// //   fill: red;
+// // }
+.state{
   fill: #222;
+  stroke: #fff;
+  stroke-width: 1px;
 }
 
-.county-boundary{
-  fill: none;
-  stroke: #fff;
-  stroke-width: .5x;
-}
-
-.state-boundry{
-  fill: none;
-  stroke: #fff;
+.state:hover{
+  fill: green;
 }
 
 
