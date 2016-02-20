@@ -34,7 +34,6 @@
        .on({
         click: function(){
           stateSelect = $(this).attr('id');
-          console.log(stateSelect);
           huffApi(stateSelect);
         }
        });
@@ -50,7 +49,9 @@
   });
 
   function huffApi(stateSelect) {
-    console.log("line 52" + stateSelect);
+    // we need to add a function that will take stateSelect and convert to initials ("Georgia" => "ga") to pass into the api call. Right now we're only pulling "ga"
+    
+    // stateInitials = stateSelect;
 
     stateInitials = "ga";
 
@@ -68,10 +69,8 @@
 
         pollInfo['candidates'].push(candidate);
       }
-
       console.log(pollInfo);
     })
-
   }
 
 })();
