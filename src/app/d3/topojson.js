@@ -34,6 +34,7 @@
        .on({
         click: function(){
           stateSelect = $(this).attr('id');
+          console.log(stateSelect);
           huffApi(stateSelect);
         }
        });
@@ -52,15 +53,26 @@
     // we need to add a function that will take stateSelect and convert to initials ("Georgia" => "ga") to pass into the api call. Right now we're only pulling "ga"
     
     // stateInitials = stateSelect;
+    if (stateSelect == "Georgia") {
+      stateInitials = "ga";      
+    } else if (stateSelect == "Texas") {
+      stateInitials = "tx";
+    } else if (stateSelect == "Virginia") {
+      stateInitials = "va";
+    } else {
+      stateInitials = "ca";
+    }
 
-    stateInitials = "ga";
 
-    $.get("http://elections.huffingtonpost.com/pollster/api/charts.json?state=" + stateInitials + "&topic=2016-president-dem-primary", function(data){
 
+
+    $.get("http://elections.huffingtonpost.com/pollster/api/charts.json?state=" + stateInitials + "&topic=2016-president-dem-primary")
+
+    .then(function(data){
       pollInfo['title'] = data[0]['title'];
       pollInfo['candidates'] = [];
 
-      var est = data[0]['estimates']
+      var est = data[0]['estimates'];
       
       for (var i = 0; i < est.length; i++){
         var candidate = {};
@@ -69,9 +81,18 @@
 
         pollInfo['candidates'].push(candidate);
       }
-      console.log(pollInfo);
+
+      console.log(pollInfo.candidates);
+
+      $('h3').text(pollInfo.title);
+      $('h6').empty();
+      $.each(pollInfo.candidates, function(index, candidate){
+        console.log(candidate);
+        $('h6').append('<span><strong>' + candidate.choice + '</strong> ' + candidate.value +  '%</span>   ');
+        
+      })
     })
   }
-
+  
 })();
 
