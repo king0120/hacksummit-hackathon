@@ -1,7 +1,9 @@
 {
   "name": "hackathon",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "topojson": "^1.6.24"
+  },
   "scripts": {
     "test": "gulp test"
   },
