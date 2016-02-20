@@ -5,6 +5,8 @@
 
   console.log('hello from topojson');
 
+  var stateSelect;
+  var pollInfo = {};
 
   var width = 960;
   var height = 620;
@@ -31,7 +33,9 @@
        .attr('d', path)
        .on({
         click: function(){
-          console.log($(this).attr('id'));
+          stateSelect = $(this).attr('id');
+          console.log(stateSelect);
+          huffApi(stateSelect);
         }
        });
 
@@ -43,11 +47,32 @@
       .attr('class', 'state-boundry')
 
       .attr('d', path);
-
-
   });
 
+  function huffApi(stateSelect) {
+    console.log("line 52" + stateSelect);
 
+    stateInitials = "ga";
+
+    $.get("http://elections.huffingtonpost.com/pollster/api/charts.json?state=" + stateInitials + "&topic=2016-president-dem-primary", function(data){
+
+      pollInfo['title'] = data[0]['title'];
+      pollInfo['candidates'] = [];
+
+      var est = data[0]['estimates']
+      
+      for (var i = 0; i < est.length; i++){
+        var candidate = {};
+        candidate['choice'] = est[i]['choice']
+        candidate['value'] = est[i]['value']
+
+        pollInfo['candidates'].push(candidate);
+      }
+
+      console.log(pollInfo);
+    })
+
+  }
 
 })();
 
