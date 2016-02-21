@@ -37,7 +37,7 @@
     }
 
     function getState(){
-      var state = $('.active')[1].id;
+      var state = $('.active')[0].id;
       vm.state = state;
     }
 
