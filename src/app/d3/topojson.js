@@ -41,44 +41,50 @@
     });
 
     window.pollsterChart = function(data) {
-        console.log(data);
-        pollInfo['title'] = data[0]['title'];
-        pollInfo['candidates'] = [];
+        //logic added for states with no data returned
+        if (data.length === 0) {
+            $('h3').text('Info coming soon!');
+        } else {
+            console.log(data);
+            pollInfo['title'] = data[0]['title'];
+            pollInfo['candidates'] = [];
 
-        var est = data[0]['estimates'];
+            var est = data[0]['estimates'];
 
-        for (var i = 0; i < est.length; i++) {
-            var candidate = {};
-            candidate['choice'] = est[i]['choice']
-            candidate['value'] = est[i]['value']
+            for (var i = 0; i < est.length; i++) {
+                var candidate = {};
+                candidate['choice'] = est[i]['choice']
+                candidate['value'] = est[i]['value']
 
-            pollInfo['candidates'].push(candidate);
+                pollInfo['candidates'].push(candidate);
+            }
+
+            console.log(pollInfo.candidates);
+
+            $('h3').text(pollInfo.title);
+            $('h6').empty();
+            $.each(pollInfo.candidates, function(index, candidate) {
+                console.log(candidate);
+                $('h6').append('<span><strong>' + candidate.choice + '</strong> ' + candidate.value + '%</span>   ');
+
+            });
         }
-
-        console.log(pollInfo.candidates);
-
-        $('h3').text(pollInfo.title);
-        $('h6').empty();
-        $.each(pollInfo.candidates, function(index, candidate) {
-            console.log(candidate);
-            $('h6').append('<span><strong>' + candidate.choice + '</strong> ' + candidate.value + '%</span>   ');
-
-        });
     };
 
     function huffApi(stateSelect) {
         // we need to add a function that will take stateSelect and convert to initials ("Georgia" => "ga") to pass into the api call. Right now we're only pulling "ga"
+        console.log(stateSelect);
+        stateInitials = stateSelect;
 
-
-        if (stateSelect == "Georgia") {
-            stateInitials = "ga";
-        } else if (stateSelect == "Texas") {
-            stateInitials = "tx";
-        } else if (stateSelect == "Virginia") {
-            stateInitials = "va";
-        } else {
-            stateInitials = "ca";
-        }
+        // if (stateSelect == "Georgia") {
+        //     stateInitials = "ga";
+        // } else if (stateSelect == "Texas") {
+        //     stateInitials = "tx";
+        // } else if (stateSelect == "Virginia") {
+        //     stateInitials = "va";
+        // } else {
+        //     stateInitials = "ca";
+        // }
         $.ajax({
             url: "https://elections.huffingtonpost.com/pollster/api/charts.json?callback=pollsterChart&state=" + stateInitials + "&topic=2016-president-dem-primary",
             type: "GET",
