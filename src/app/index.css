@@ -1,0 +1,60 @@
+/**
+ *  If you want to override some bootstrap variables, you have to change values here.
+ *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+ */
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0; }
+
+.container {
+  height: 100vh; }
+
+.thumbnail {
+  height: 200px; }
+  .thumbnail img.pull-right {
+    width: 50px; }
+
+.map {
+  position: absolute;
+  top: 200px;
+  width: 90%;
+  padding: 0 15px;
+  margin: 0 5%; }
+
+.state {
+  fill: #222;
+  stroke: #fff;
+  stroke-width: 1px;
+  transition: all 0.4s ease-in-out; }
+
+.active {
+  fill: green; }
+
+.state:hover {
+  fill: green; }
+
+.dem {
+  background-color: #232066;
+  color: #fff; }
+
+.gop {
+  background-image: radial-gradient(50% 105%, rgba(205, 77, 77, 0.3) 50%, #E32929 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff; }
+
+nav {
+  display: none; }
+
+/**
+ *  Do not remove the comments below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+
+/*# sourceMappingURL=index.css.map */

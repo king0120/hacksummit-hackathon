@@ -75,6 +75,22 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   fill: green;
 }
 
+.dem {
+  background-color: #232066;
+  color: #fff;
+}
+
+.gop {
+  background-image: radial-gradient(50% 105%, rgba(205,77,77,0.30) 50%, #E32929 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+
+nav {
+  display: none;
+}
+
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
