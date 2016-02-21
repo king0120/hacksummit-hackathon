@@ -72,17 +72,12 @@
     };
 
 
-    $('#selectWrapper').on('click', function() {
-        if($('#dem').is(':checked')) { alert("it's checked"); }
-    });
-
-
     function huffApi(stateSelect) {
         //grabs user click on a state
         stateInitials = stateSelect;
 
         //updates call based on user selection of Dem or GOP
-        var party = 'dem';
+        var party = $('#dem').is(':checked') ? 'dem' : 'gop';
 
         $.ajax({
             url: "https://elections.huffingtonpost.com/pollster/api/charts.json?callback=pollsterChart&state=" + stateInitials + "&topic=2016-president-" + party + "-primary",
