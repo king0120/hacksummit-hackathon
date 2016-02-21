@@ -66,17 +66,17 @@ body {
 // //   fill: red;
 // // }
 .state{
-  fill: #222;
-  stroke: #fff;
+  fill: darkslategrey;
+  // stroke: #fff;
   stroke-width: 1px;
   transition: all .4s ease-in-out
 }
 .active{
-  fill: green;
+  fill: darkcyan;
 }
 
 .state:hover{
-  fill: green;
+  fill: cyan;
 }
 
 
