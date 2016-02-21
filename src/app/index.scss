@@ -19,6 +19,10 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   padding: 0.2em 0;
 }
 
+.container{
+  height: 100vh;
+}
+
 .thumbnail {
   height: 200px;
 
@@ -29,6 +33,8 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 
 // d3 Map Styles
 .map{
+  position: absolute;
+  top: 150px;
   width: 90%;
   padding: 0 15px;
   margin: 0 5%;
