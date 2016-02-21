@@ -19,31 +19,6 @@
 
     var path = d3.geo.path().projection(projection);
 
-    function clicked(d) {
-        console.log(d);
-        var x, y, k;
-        if (d && centered !== d) {
-            var centroid = path.centroid(d);
-            console.log(centroid);
-            x = centroid[0];
-            y = centroid[1];
-            k = 3;
-            centered = d;
-        } else {
-            console.log('else');
-            x = width / 2;
-            y = height / 2;
-            k = 1;
-            centered = null;
-        }
-        g.selectAll('path').classed('active', centered && function(d) {
-            return d === centered;
-        });
-        g.transition().duration(1000).attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + "," + -y + ")")
-            .style('stroke-width', 1.5 / k + 'px');
-    }
-
-
     d3.json('assets/newmap.json', function(err, us) {
         if (err) return console.error(err);
         //draws the US outline
@@ -114,4 +89,27 @@
         });
     }
 
+    function clicked(d) {
+        console.log(d);
+        var x, y, k;
+        if (d && centered !== d) {
+            var centroid = path.centroid(d);
+            console.log(centroid);
+            x = centroid[0];
+            y = centroid[1];
+            k = 3;
+            centered = d;
+        } else {
+            console.log('else');
+            x = width / 2;
+            y = height / 2;
+            k = 1;
+            centered = null;
+        }
+        g.selectAll('path').classed('active', centered && function(d) {
+            return d === centered;
+        });
+        g.transition().duration(1000).attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + "," + -y + ")")
+            .style('stroke-width', 1.5 / k + 'px');
+    }
 })();

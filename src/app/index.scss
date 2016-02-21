@@ -40,7 +40,7 @@ body {
 // d3 Map Styles
 .map{
   position: absolute;
-  top: 200px;
+  top: 150px;
   width: 90%;
   padding: 0 15px;
   margin: 0 5%;
@@ -48,8 +48,8 @@ body {
 
 .state{
   fill: darkslategrey;
-  // stroke: #fff;
-  stroke-width: 1px;
+  stroke: #bbb;
+  stroke-width: .2px;
   transition: all .4s ease-in-out
 }
 .active{
