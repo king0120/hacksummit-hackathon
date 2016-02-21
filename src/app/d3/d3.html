@@ -1,10 +1,22 @@
 <div class="container">
 
+<div ng-class='d3.party' class="container">
+   <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
   <h3>
     Hello from d3.html
   </h3>
+  <p>Pick one:</p>
+  <div id="selectWrapper">
+    <label for="gop">Republican</label>
+    <input id="gop" ng-model='d3.party' ng-click='d3.huffApi' type="radio" name="party" value="gop">
+    <label for="dem">Democrat</label>
+    <input id="dem" ng-model='d3.party' ng-click='d3.huffApi' type="radio" name="party" value="dem" checked="checked">
+  </div>
   <div id='d3'></div>
-
+  <div id='party' class='hide'>{{d3.party}}</div>
   <div id="results"></div>
   <h6></h6>
   <!-- <div class='map'></div> -->

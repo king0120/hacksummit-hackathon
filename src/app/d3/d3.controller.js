@@ -9,11 +9,12 @@
   function d3Controller($timeout, webDevTec, toastr) {
     var vm = this;
 
-    vm.awesomeThings = [];
+    vm.party = 'dem';
+    vm.state = '';
     vm.classAnimation = '';
     vm.creationDate = 1455958764146;
     vm.showToastr = showToastr;
-
+    vm.huffApi = huffApi;
     activate();
 
     function activate() {
@@ -22,6 +23,24 @@
         vm.classAnimation = 'rubberBand';
       }, 4000);
     }
+
+    function getState(){
+      vm.state = $('.active').attr('id');
+    }
+    function huffApi() {
+      console.log('huffAPI');
+
+      getState();
+        //updates call based on user selection of Dem or GOP
+
+        $.ajax({
+            url: "https://elections.huffingtonpost.com/pollster/api/charts.json?callback=pollsterChart&state=" + vm.state + "&topic=2016-president-" + vm.party + "-primary",
+            type: "GET",
+            dataType: 'script',
+            cache: true,
+        });
+    }
+
 
     function showToastr() {
       toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
