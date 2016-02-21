@@ -71,22 +71,21 @@
         }
     };
 
+
+    $('#selectWrapper').on('click', function() {
+        if($('#dem').is(':checked')) { alert("it's checked"); }
+    });
+
+
     function huffApi(stateSelect) {
-        // we need to add a function that will take stateSelect and convert to initials ("Georgia" => "ga") to pass into the api call. Right now we're only pulling "ga"
-        console.log(stateSelect);
+        //grabs user click on a state
         stateInitials = stateSelect;
 
-        // if (stateSelect == "Georgia") {
-        //     stateInitials = "ga";
-        // } else if (stateSelect == "Texas") {
-        //     stateInitials = "tx";
-        // } else if (stateSelect == "Virginia") {
-        //     stateInitials = "va";
-        // } else {
-        //     stateInitials = "ca";
-        // }
+        //updates call based on user selection of Dem or GOP
+        var party = 'dem';
+
         $.ajax({
-            url: "https://elections.huffingtonpost.com/pollster/api/charts.json?callback=pollsterChart&state=" + stateInitials + "&topic=2016-president-dem-primary",
+            url: "https://elections.huffingtonpost.com/pollster/api/charts.json?callback=pollsterChart&state=" + stateInitials + "&topic=2016-president-" + party + "-primary",
             type: "GET",
             dataType: 'script',
             cache: true,
