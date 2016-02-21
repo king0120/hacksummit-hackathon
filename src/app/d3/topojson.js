@@ -52,7 +52,7 @@
             g.insert('path', '.graticule')
                 .datum(us.features[i])
                 .attr('num', i)
-                .attr('class', 'state')
+                .attr('class', 'state show')
                 .attr('id', stateName)
                 .attr('d', path)
                 .on({
