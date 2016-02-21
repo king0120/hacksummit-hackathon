@@ -15,7 +15,9 @@
 
     var g = svg.append('g');
 
-    var projection = d3.geo.albersUsa().scale(1000).translate([width / 1.5, height / 2.6]);
+    var projection = d3.geo.albersUsa()
+                            .scale(1000)
+                            // .translate([width / 1.5, height / 2.5]);
 
     var path = d3.geo.path().projection(projection);
 
