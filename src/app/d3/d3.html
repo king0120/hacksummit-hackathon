@@ -10,9 +10,9 @@
   <p>Pick one:</p>
   <div id="selectWrapper">
     <label for="gop">Republican</label>
-    <input id="gop" ng-model='d3.party' ng-click='d3.huffApi' type="radio" name="party" value="gop">
+    <input id="gop" ng-model='d3.party' ng-click='d3.huffApi()' type="radio" name="party" value="gop">
     <label for="dem">Democrat</label>
-    <input id="dem" ng-model='d3.party' ng-click='d3.huffApi' type="radio" name="party" value="dem" checked="checked">
+    <input id="dem" ng-model='d3.party' ng-click='d3.huffApi()' type="radio" name="party" value="dem" checked="checked">
   </div>
   <div id='d3'></div>
   <div id='party' class='hide'>{{d3.party}}</div>
