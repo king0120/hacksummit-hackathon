@@ -46,7 +46,8 @@ body {
 
 .state{
   fill: darkslategrey;
-  stroke-width: 1px;
+  stroke: lightyellow;
+  stroke-width: .5px;
   transition: all .4s ease-in-out
 }
 .active{
