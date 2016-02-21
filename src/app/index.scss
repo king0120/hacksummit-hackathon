@@ -65,6 +65,9 @@ body {
   stroke-width: 1px;
   transition: all .4s ease-in-out
 }
+.active{
+  fill: green;
+}
 
 .state:hover{
   fill: green;

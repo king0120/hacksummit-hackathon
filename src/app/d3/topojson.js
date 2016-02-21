@@ -3,9 +3,9 @@
 
     var width = 960;
     var height = 620;
-    var centered;
     var stateSelect;
     var pollInfo = {};
+    var centered;
 
     var svg = d3.select('body').append('svg')
         .attr('class', 'map')
@@ -19,29 +19,54 @@
 
     var path = d3.geo.path().projection(projection);
 
+    function clicked(d) {
+        console.log(d);
+        var x, y, k;
+        if (d && centered !== d) {
+            var centroid = path.centroid(d);
+            console.log(centroid);
+            x = centroid[0];
+            y = centroid[1];
+            k = 3;
+            centered = d;
+        } else {
+            console.log('else');
+            x = width / 2;
+            y = height / 2;
+            k = 1;
+            centered = null;
+        }
+        g.selectAll('path').classed('active', centered && function(d) {
+            return d === centered;
+        });
+        g.transition().duration(1000).attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + "," + -y + ")")
+            .style('stroke-width', 1.5 / k + 'px');
+    }
+
+
     d3.json('assets/newmap.json', function(err, us) {
         if (err) return console.error(err);
         //draws the US outline
         for (i = 0; i < us.features.length; i++) {
             var stateName = us.features[i].properties.NAME;
-            svg.insert('path', '.graticule')
+            g.insert('path', '.graticule')
                 .datum(us.features[i])
-                .attr('class', 'state')
+                .attr('num', i)
+                .attr('class', 'state show')
                 .attr('id', stateName)
                 .attr('d', path)
                 .on({
                     click: function() {
                         stateSelect = $(this).attr('id');
-                        console.log(stateSelect);
                         huffApi(stateSelect);
-                        clicked;
+                        clicked(us.features[$(this).attr('num')]);
                     }
                 });
+
         }
     });
 
     window.pollsterChart = function(data) {
-        console.log(data);
         pollInfo['title'] = data[0]['title'];
         pollInfo['candidates'] = [];
 
@@ -49,13 +74,11 @@
 
         for (var i = 0; i < est.length; i++) {
             var candidate = {};
-            candidate['choice'] = est[i]['choice']
-            candidate['value'] = est[i]['value']
+            candidate['choice'] = est[i]['choice'];
+            candidate['value'] = est[i]['value'];
 
             pollInfo['candidates'].push(candidate);
         }
-
-        console.log(pollInfo.candidates);
 
         $('h3').text(pollInfo.title);
         $('h6').empty();
@@ -86,39 +109,6 @@
             cache: true,
         });
     }
-    // //draws state lines
-    // g.insert('path', '.graticule')
-    //     .datum(topojson.mesh(us, us.features, function(a, b) {
-    //         return a !== b;
-    //     }))
-    //     .attr('class', 'state-boundry')
-
-    // .attr('d', path);
-
-    function clicked(d) {
-        var x, y, k;
-        console.log(d);
-        if (d && centered !== d) {
-            var centroid = path.centroid(d);
-            x = centroid[0];
-            y = centroid[1];
-            k = 4;
-            centered = d;
-        } else {
-            x = width / 2;
-            y = height / 2;
-            k = 1;
-            centered = null;
-        }
-
-        g.selectAll('path').classed('active', centered && function(d) {
-            return d === centered;
-        });
-        g.transition().duration(1000).attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + "," + -y + ")")
-            .style('stroke-width', 1.5 / k + 'px');
-
-    }
-
-
 
 })();
+
