@@ -51,6 +51,7 @@
             var stateName = us.features[i].properties.NAME;
             g.insert('path', '.graticule')
                 .datum(us.features[i])
+                .attr('ng-click', 'd3.huffApi()')
                 .attr('num', i)
                 .attr('class', 'state show')
                 .attr('id', stateName)

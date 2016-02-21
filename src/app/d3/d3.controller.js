@@ -14,20 +14,7 @@
     vm.classAnimation = '';
     vm.creationDate = 1455958764146;
     vm.showToastr = showToastr;
-    vm.huffApi = huffApi;
-    activate();
-
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
-
-    function getState(){
-      vm.state = $('.active').attr('id');
-    }
-    function huffApi() {
+    vm.huffApi = function(){
       console.log('huffAPI');
 
       getState();
@@ -39,6 +26,19 @@
             dataType: 'script',
             cache: true,
         });
+    };
+    activate();
+
+    function activate() {
+      getWebDevTec();
+      $timeout(function() {
+        vm.classAnimation = 'rubberBand';
+      }, 4000);
+    }
+
+    function getState(){
+      var state = $('.active')[1].id;
+      vm.state = state;
     }
 
 
