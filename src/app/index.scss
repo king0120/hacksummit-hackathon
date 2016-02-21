@@ -40,13 +40,12 @@ body {
   position: absolute;
   top: 200px;
   width: 90%;
-  padding: 0 15px;
-  margin: 0 5%;
+  // padding: 0 10%;
+  margin: 0 auto;
 }
 
 .state{
   fill: darkslategrey;
-  // stroke: #fff;
   stroke-width: 1px;
   transition: all .4s ease-in-out
 }
