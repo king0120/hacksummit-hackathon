@@ -15,7 +15,7 @@
 
     var g = svg.append('g');
 
-    var projection = d3.geo.albersUsa().scale(1000).translate([width / 1.5, height / 2.8]);
+    var projection = d3.geo.albersUsa().scale(1000).translate([width / 1.5, height / 2.6]);
 
     var path = d3.geo.path().projection(projection);
 
@@ -63,7 +63,7 @@
 
             console.log(pollInfo.candidates);
 
-            $('h3').text(pollInfo.title);
+            $('h1').text(pollInfo.title);
             $('h6').empty();
             $.each(pollInfo.candidates, function(index, candidate) {
                 console.log(candidate);
