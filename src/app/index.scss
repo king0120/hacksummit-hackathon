@@ -11,6 +11,12 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
  */
 // bower:scss
 // endbower
+*:focus{
+  outline: none;
+}
+body {
+  border: 1px dotted pink;
+}
 
 .browsehappy {
   margin: 0.2em 0;
@@ -41,17 +47,17 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 }
 
 .state{
-  fill: #222;
-  stroke: #fff;
+  fill: darkslategrey;
+  // stroke: #fff;
   stroke-width: 1px;
   transition: all .4s ease-in-out
 }
 .active{
-  fill: green;
+  fill: darkcyan;
 }
 
 .state:hover{
-  fill: green;
+  fill: cyan;
 }
 
 .dem {
@@ -61,6 +67,13 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 
 .gop {
   background-image: radial-gradient(50% 105%, rgba(205,77,77,0.30) 50%, #E32929 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+
+.dem {
+  background-image: radial-gradient(50% 105%, rgba(205,255,255,0.8) 50%, rgba(3,47,93,1) 100%);
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
