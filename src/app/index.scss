@@ -12,6 +12,10 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 // bower:scss
 // endbower
 
+body {
+  border: 1px dotted pink;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -41,17 +45,17 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 }
 
 .state{
-  fill: #222;
-  stroke: #fff;
+  fill: darkslategrey;
+  // stroke: #fff;
   stroke-width: 1px;
   transition: all .4s ease-in-out
 }
 .active{
-  fill: green;
+  fill: darkcyan;
 }
 
 .state:hover{
-  fill: green;
+  fill: cyan;
 }
 
 
