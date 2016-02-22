@@ -2,7 +2,7 @@ states = [];
 (function() {
     console.log('hello from topojson');
 
-    var width = 960;
+    var width = 560;
     var height = 620;
     var stateSelect;
     var pollInfo = {};
@@ -11,12 +11,14 @@ states = [];
     var svg = d3.select('body').append('svg')
         .attr('class', 'map')
         .attr('height', height)
-        .attr('width', 400);
+        .attr('width', width);
 
 
     var g = svg.append('g');
 
-    var projection = d3.geo.albersUsa().scale(1000).translate([width / 1.5, height / 2]);
+    var projection = d3.geo.albersUsa()
+        .scale(1000)
+        // .translate([width / 1.5, height / 2.5]);
 
     var path = d3.geo.path().projection(projection);
 
@@ -59,13 +61,20 @@ states = [];
             pollInfo['candidates'].push(candidate);
         }
 
-        console.log(pollInfo.candidates);
-
-        // $('h3').text(pollInfo.title);
+        $('h3').text(pollInfo.title);
         $('h6').empty();
-        $.each(pollInfo.candidates, function(index, candidate) {
-            $('h6').append('<span><strong>' + candidate.choice + '</strong> ' + candidate.value + '%</span>   <br>');
-        });
+        if(candidate.choice !== undefined){
+          $.each(pollInfo.candidates, function(index, candidate) {
+              $('h6').append('<span><strong>' + candidate.choice + '</strong> ' + candidate.value + '%</span>   ');
+              // $('h3').text(pollInfo.title);
+              $('h6').empty();
+              $.each(pollInfo.candidates, function(index, candidate) {
+                  $('h6').append('<span class="candidateColor" id='+ candidate.choice +'></span><span class="candidateName"><strong>' + candidate.choice + '</strong> ' + candidate.value + '%</span>   <br>')
+              });
+          });
+        } else {
+          $('h6').append('<span><strong>Not Enough Polling Data</strong></span>   ');
+        }
     };
 
 
@@ -101,12 +110,13 @@ states = [];
         g.selectAll('path').classed('active', centered && function(d) {
             return d === centered;
         });
-        g.transition().duration(1000).attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + "," + -y + ")")
+        g.transition().duration(1000).attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x/1.3 + "," + -y + ")")
             .style('stroke-width', 1.5 / k + 'px');
     }
 
     function colorState(data, est) {
         //Color the State
+        if (est[0] !== undefined){
         var currentLead = est[0].choice;
         console.log('colorState' + data[0]);
         if (currentLead === 'Clinton') {
@@ -153,14 +163,7 @@ states = [];
             console.log($('#' + data[0].state.toLowerCase()));
             $('#' + data[0].state.toLowerCase()).css('fill', '#A5F2FF');
         }
-
+        }
     }
-    // setTimeout(function() {
-    //     states.forEach(function(x) {
-    //         $('#' + x).css('fill', 'darkslategrey');
-    //         console.log('coloring ' + x);
-    //         huffApi(x);
-    //     });
-    // }, 100);
 
 })();

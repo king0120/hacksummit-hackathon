@@ -11,11 +11,19 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
  */
 // bower:scss
 // endbower
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
+
 *:focus{
   outline: none;
 }
 body {
   border: 1px dotted pink;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+h1 {
+  font-weight: 700;
 }
 
 .browsehappy {
@@ -36,44 +44,45 @@ body {
     width: 50px;
   }
 }
-
+h6{
+  z-index: 30;
+  line-height: 1em;
+  font-size: 1.5em;
+}
 // d3 Map Styles
 .map{
   position: absolute;
-  top: 150px;
-  width: 90%;
-  padding: 0 15px;
-  margin: 0 5%;
+  top: 60%;
+  right: 1%;
+  transform: translate(0%, -50%);
+  width: 80%;
+  // padding: 0 10%;
+  margin: 0 auto;
 }
 
 .state{
-  fill: darkslategrey;
-  stroke: white;
+  fill: transparent;
+  stroke: cornsilk;
   stroke-width: .5px;
   transition: all .4s ease-in-out
 }
 .active{
-  // fill: darkcyan;
+  fill: wheat;
 }
 
 .state:hover{
-  fill: #339dff;
-}
-
-.dem {
-  background-color: #232066;
-  color: #fff;
+  fill: #ddd;
 }
 
 .gop {
-  background-image: radial-gradient(50% 105%, rgba(205,77,77,0.30) 50%, #E32929 100%);
+  background-image: radial-gradient(#f99, darkred);
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
 }
 
 .dem {
-  background-image: radial-gradient(50% 105%, rgba(205,255,255,0.8) 50%, rgba(3,47,93,1) 100%);
+  background-image: radial-gradient(steelblue, midnightblue);
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
@@ -89,6 +98,59 @@ nav {
   right: 300px;
   z-index: 3
 }
+
+// color for squre div next to candicate name
+.candidateName{
+  margin-top: -2px;
+}
+.candidateColor{
+  background-color: grey;
+  display: inline-block;
+  margin-top: 2px;
+  margin-right: 2px;
+  width: 25px;
+  height: 25px;
+}
+#Clinton{
+  background-color:#2BB8CD;
+}
+
+#Sanders{
+  background-color:#0D3DDB;
+}
+
+#Trump{
+  background-color:#f00;
+}
+
+#Rubio{
+  background-color:#f44;
+}
+
+#Cruz{
+  background-color:#f88;
+}
+
+#Carson{
+  background-color:#faa;
+}
+
+#Huckabee{
+  background-color:#fcc;
+}
+
+#Christie{
+  background-color:#f36;
+}
+
+#Walker{
+  background-color:#e61873;
+}
+
+#Paul{
+  background-color:#f6137;
+}
+
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
