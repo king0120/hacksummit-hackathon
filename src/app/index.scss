@@ -48,16 +48,16 @@ body {
 
 .state{
   fill: darkslategrey;
-  stroke: #bbb;
-  stroke-width: .2px;
+  stroke: white;
+  stroke-width: .5px;
   transition: all .4s ease-in-out
 }
 .active{
-  fill: darkcyan;
+  // fill: darkcyan;
 }
 
 .state:hover{
-  fill: cyan;
+  fill: #339dff;
 }
 
 .dem {
@@ -83,6 +83,12 @@ nav {
   display: none;
 }
 
+#selectWrapper{
+  position: absolute;
+  top: 0;
+  right: 300px;
+  z-index: 3
+}
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject

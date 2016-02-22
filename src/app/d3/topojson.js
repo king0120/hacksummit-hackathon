@@ -1,3 +1,4 @@
+states = [];
 (function() {
     console.log('hello from topojson');
 
@@ -10,7 +11,7 @@
     var svg = d3.select('body').append('svg')
         .attr('class', 'map')
         .attr('height', height)
-        .attr('width', width);
+        .attr('width', 400);
 
 
     var g = svg.append('g');
@@ -38,39 +39,33 @@
                         clicked(us.features[$(this).attr('num')]);
                     }
                 });
-
+            states.push(stateName);
         }
     });
 
     window.pollsterChart = function(data) {
-        //logic added for states with no data returned
-        if (data.length === 0) {
-            $('h3').text('Info coming soon!');
-        } else {
-            console.log(data);
-            pollInfo['title'] = data[0]['title'];
-            pollInfo['candidates'] = [];
+        pollInfo['title'] = data[0]['title'];
+        pollInfo['candidates'] = [];
 
-            var est = data[0]['estimates'];
+        var est = data[0]['estimates'];
 
-            for (var i = 0; i < est.length; i++) {
-                var candidate = {};
-                candidate['choice'] = est[i]['choice']
-                candidate['value'] = est[i]['value']
+        colorState(data, est);
 
-                pollInfo['candidates'].push(candidate);
-            }
+        for (var i = 0; i < est.length; i++) {
+            var candidate = {};
+            candidate['choice'] = est[i]['choice']
+            candidate['value'] = est[i]['value']
 
-            console.log(pollInfo.candidates);
-
-            $('h3').text(pollInfo.title);
-            $('h6').empty();
-            $.each(pollInfo.candidates, function(index, candidate) {
-                console.log(candidate);
-                $('h6').append('<span><strong>' + candidate.choice + '</strong> ' + candidate.value + '%</span>   ');
-
-            });
+            pollInfo['candidates'].push(candidate);
         }
+
+        console.log(pollInfo.candidates);
+
+        // $('h3').text(pollInfo.title);
+        $('h6').empty();
+        $.each(pollInfo.candidates, function(index, candidate) {
+            $('h6').append('<span><strong>' + candidate.choice + '</strong> ' + candidate.value + '%</span>   <br>');
+        });
     };
 
 
@@ -80,7 +75,7 @@
 
         //updates call based on user selection of Dem or GOP
         var party = $('#party').text();
-
+        console.log('party: ' + party + '. stateInitials: ' + stateInitials);
         $.ajax({
             url: "https://elections.huffingtonpost.com/pollster/api/charts.json?callback=pollsterChart&state=" + stateInitials + "&topic=2016-president-" + party + "-primary",
             type: "GET",
@@ -90,17 +85,14 @@
     }
 
     function clicked(d) {
-        console.log(d);
         var x, y, k;
         if (d && centered !== d) {
             var centroid = path.centroid(d);
-            console.log(centroid);
             x = centroid[0];
             y = centroid[1];
             k = 3;
             centered = d;
         } else {
-            console.log('else');
             x = width / 2;
             y = height / 2;
             k = 1;
@@ -112,4 +104,63 @@
         g.transition().duration(1000).attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + "," + -y + ")")
             .style('stroke-width', 1.5 / k + 'px');
     }
+
+    function colorState(data, est) {
+        //Color the State
+        var currentLead = est[0].choice;
+        console.log('colorState' + data[0]);
+        if (currentLead === 'Clinton') {
+            console.log('CLINTON');
+            $('#' + data[0].state.toLowerCase()).css('fill', '#2BB8CD');
+        } else if (currentLead === 'Sanders') {
+            console.log('SANDERS');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#0D3DDB');
+        } else if (currentLead === "Trump") {
+            console.log('TRUMP');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#f00');
+        } else if (currentLead === "Rubio") {
+            console.log('RUBIO');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#f44');
+        } else if (currentLead === "Cruz") {
+            console.log('CRUZ');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#f88');
+        } else if (currentLead === "Carson") {
+            console.log('CARSON');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#faa');
+        } else if (currentLead === "Huckabee") {
+            console.log('HUCKABEE');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#fcc');
+        } else if (currentLead === "Christie") {
+            console.log('CHRISTIE');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#f36');
+        } else if (currentLead === "Walker") {
+            console.log('WALKER');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#e61873');
+        } else if (currentLead === "Paul") {
+            console.log('PAUL');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#f6137');
+        } else {
+            console.log('OTHER');
+            console.log($('#' + data[0].state.toLowerCase()));
+            $('#' + data[0].state.toLowerCase()).css('fill', '#A5F2FF');
+        }
+
+    }
+    // setTimeout(function() {
+    //     states.forEach(function(x) {
+    //         $('#' + x).css('fill', 'darkslategrey');
+    //         console.log('coloring ' + x);
+    //         huffApi(x);
+    //     });
+    // }, 100);
+
 })();
