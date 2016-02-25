@@ -2,6 +2,8 @@
   "name": "hackathon",
   "version": "0.0.0",
   "dependencies": {
+    "express": "^4.13.4",
+    "gzippo": "^0.2.0",
     "topojson": "^1.6.24"
   },
   "scripts": {
